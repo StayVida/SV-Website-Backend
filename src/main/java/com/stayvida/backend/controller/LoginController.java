@@ -19,15 +19,27 @@ public class LoginController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        String name = loginRepo.findUserNameIfValid(request.getEmail(), request.getPassword());
+   @PostMapping("/login")
+public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+    String name = loginRepo.findUserNameIfValid(request.getEmail(), request.getPassword());
 
-        if (name != null) {
-            String token = jwtUtil.generateToken(request.getEmail());
-            return ResponseEntity.ok(new LoginResponse(true, token, name, request.getEmail()));
-        } else {
-            return ResponseEntity.ok(new LoginResponse(false, null, null,null));
-        }
+    if (name != null) {
+        String token = jwtUtil.generateToken(request.getEmail());
+        return ResponseEntity.ok(new LoginResponse(
+            true,
+            token,
+            name,
+            request.getEmail(),
+            "Login Successful" // ✅ message
+        ));
+    } else {
+        return ResponseEntity.ok(new LoginResponse(
+            false,
+            null,
+            null,
+            null,
+            "Login Credential Mismatch or Login Error" // ✅ messages
+        ));
     }
+}
 }
