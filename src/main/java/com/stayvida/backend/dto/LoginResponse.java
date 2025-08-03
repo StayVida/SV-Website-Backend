@@ -5,15 +5,20 @@ public class LoginResponse {
     private String token;
     private String name;
     private String email;
+    private String message;
 
-    public LoginResponse(boolean success, String token, String name, String email) {
+    public LoginResponse() {
+    }
+
+    public LoginResponse(boolean success, String token, String name, String email, String message) {
         this.success = success;
         this.token = token;
         this.name = name;
         this.email = email;
+        this.message = message;
     }
 
-    // Getters & Setters
+    // Getters
     public boolean isSuccess() {
         return success;
     }
@@ -25,7 +30,12 @@ public class LoginResponse {
     public String getName() {
         return name;
     }
+
     public String getEmail() {
         return email;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.lang.NonNull;
 import com.stayvida.backend.model.Hotel;
 
 import java.sql.ResultSet;
@@ -21,17 +21,21 @@ public class HotelRepository {
     public List<Hotel> searchHotels(String destination, String checkIn, String checkOut, int adultCapacity, int childrenCapacity) {
         String sql = "SELECT * FROM hotels WHERE location = ?";
 
-        List<Hotel> hotels = jdbcTemplate.query(sql, new Object[]{destination}, new RowMapper<Hotel>() {
-            @Override
-            public Hotel mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Hotel hotel = new Hotel();
-                hotel.setId(rs.getInt("id"));
-                hotel.setHotel(rs.getString("hotel"));
-                hotel.setLocation(rs.getString("location"));
-                hotel.setPrice(rs.getInt("price"));
-                return hotel;
-            }
-        });
+        List<Hotel> hotels = jdbcTemplate.query(
+    sql,
+    new RowMapper<Hotel>() {
+        @Override
+        public Hotel mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
+            Hotel hotel = new Hotel();
+            hotel.setId(rs.getInt("id"));
+            hotel.setHotel(rs.getString("hotel"));
+            hotel.setLocation(rs.getString("location"));
+            hotel.setPrice(rs.getInt("price"));
+            return hotel;
+        }
+    },
+    destination // <-- this is passed as a vararg (instead of Object[])
+);
 
         // Check availability for each hotel
         for (Hotel hotel : hotels) {
