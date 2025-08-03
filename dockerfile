@@ -14,5 +14,5 @@ RUN ./mvnw clean package -DskipTests
 EXPOSE 8080
 
 # ✅ Replace with your actual JAR file
-CMD ["java", "-jar", "target/backend"]
+CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
 
