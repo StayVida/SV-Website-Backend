@@ -1,14 +1,18 @@
-# Use an official JDK image as base
 FROM eclipse-temurin:17-jdk
 
-# Set working directory
 WORKDIR /app
 
-# Copy the Maven wrapper and project files
 COPY . .
 
-# Package the Spring Boot application (skip tests)
+# ✅ Give executable permission to mvnw
+RUN chmod +x mvnw
+
+# ✅ Build the project
 RUN ./mvnw clean package -DskipTests
 
-# Run the Spring Boot app
+# Expose the app port
+EXPOSE 8080
+
+# ✅ Replace with your actual JAR file
 CMD ["java", "-jar", "target/backend"]
+
