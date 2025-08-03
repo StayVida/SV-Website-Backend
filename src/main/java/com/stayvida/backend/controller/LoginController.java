@@ -38,7 +38,7 @@ public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
             null,
             null,
             null,
-            "Login Credential Mismatch or Login Error" // ✅ message
+            "Login Credential Mismatch or Login Error" // ✅ messages
         ));
     }
 }
