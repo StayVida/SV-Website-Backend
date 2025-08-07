@@ -23,18 +23,20 @@ public class HotelRepository {
 
         List<Hotel> hotels = jdbcTemplate.query(
     sql,
-    new RowMapper<Hotel>() {
-        @Override
-        public Hotel mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
-            Hotel hotel = new Hotel();
-            hotel.setId(rs.getInt("id"));
-            hotel.setHotel(rs.getString("hotel"));
-            hotel.setLocation(rs.getString("location"));
-            hotel.setPrice(rs.getInt("price"));
-            return hotel;
-        }
-    },
-    destination // <-- this is passed as a vararg (instead of Object[])
+        new RowMapper<Hotel>() {
+            @Override
+            public Hotel mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
+                Hotel hotel = new Hotel();
+                hotel.setId(rs.getInt("id"));
+                hotel.setHotel(rs.getString("hotel"));
+                hotel.setLocation(rs.getString("location"));
+                hotel.setPrice(rs.getInt("price"));
+                hotel.setImage(rs.getBytes("image")); // 👈 Set image blob data
+
+                return hotel;
+            }
+        },
+        destination // <-- this is passed as a vararg (instead of Object[])
 );
 
         // Check availability for each hotel

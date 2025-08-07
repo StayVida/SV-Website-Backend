@@ -6,6 +6,7 @@ public class Hotel {
     private String location;
     private int price;
     private boolean availability; // <- add this
+    private byte[] image; // 👈 Store raw image as byte array
 
     // Getters and Setters
     public int getId() { return id; }
@@ -22,4 +23,7 @@ public class Hotel {
 
     public boolean isAvailability() { return availability; }
     public void setAvailability(boolean availability) { this.availability = availability; }
+
+    public byte[] getImage() { return image; }
+    public void setImage(byte[] image) { this.image = image; }
 }

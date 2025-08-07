@@ -13,7 +13,8 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/signup", "/api/login").permitAll()
+               .requestMatchers("/api/signup", "/api/login", "/api/hotels/search").permitAll()
+
                 .anyRequest().authenticated()
             )
             .httpBasic(httpBasic -> httpBasic.disable())  // ✅ disable HTTP Basic auth
