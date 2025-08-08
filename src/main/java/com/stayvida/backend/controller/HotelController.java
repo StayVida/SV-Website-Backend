@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.Base64;
 
 @RestController
 @RequestMapping("/api/hotels")
@@ -29,22 +28,25 @@ public class HotelController {
         );
 
         // Convert to a JSON-safe list with base64 image string
-        return hotels.stream().map(hotel -> {
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", hotel.getId());
-            map.put("hotel", hotel.getHotel());
-            map.put("location", hotel.getLocation());
-            map.put("price", hotel.getPrice());
-            map.put("availability", hotel.isAvailability());
+    return hotels.stream().map(hotel -> {
+        Map<String, Object> map = new LinkedHashMap<>(); // ✅ Keeps key order
 
-            if (hotel.getImage() != null) {
-                String base64Image = Base64.getEncoder().encodeToString(hotel.getImage());
-                map.put("imageBase64", "data:image/jpeg;base64," + base64Image); // Or image/png
-            } else {
-                map.put("imageBase64", null);
-            }
+        // ✅ Insert keys in the exact order you want in JSON
+        if (hotel.getImage() != null) {
+            String base64Image = Base64.getEncoder().encodeToString(hotel.getImage());
+            map.put("imageBase64", "data:image/jpeg;base64," + base64Image);
+        } else {
+            map.put("imageBase64", null);
+        }
+        map.put("id", hotel.getId());
+        map.put("location", hotel.getLocation());
+        map.put("hotel", hotel.getHotel());
+        map.put("max_adults", hotel.getAdults());
+        map.put("max_children", hotel.getchildren());
+        map.put("price", hotel.getPrice());
+        map.put("availability", hotel.isAvailability());
 
-            return map;
-        }).collect(Collectors.toList());
-    }
+        return map;
+    }).collect(Collectors.toList());
+}
 }

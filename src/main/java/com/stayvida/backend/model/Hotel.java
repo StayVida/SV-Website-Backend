@@ -5,6 +5,8 @@ public class Hotel {
     private String hotel;
     private String location;
     private int price;
+    private int adult;
+    private int children;
     private boolean availability; // <- add this
     private byte[] image; // 👈 Store raw image as byte array
 
@@ -20,6 +22,13 @@ public class Hotel {
 
     public int getPrice() { return price; }
     public void setPrice(int price) { this.price = price; }
+
+    public int getAdults() { return adult; }
+    public void setAdult(int adult) { this.adult = adult; }
+
+    public int getchildren() { return children; }
+    public void setchildren(int children) { this.children = children; }
+
 
     public boolean isAvailability() { return availability; }
     public void setAvailability(boolean availability) { this.availability = availability; }

@@ -31,6 +31,8 @@ public class HotelRepository {
                 hotel.setHotel(rs.getString("hotel"));
                 hotel.setLocation(rs.getString("location"));
                 hotel.setPrice(rs.getInt("price"));
+                hotel.setAdult(rs.getInt("max_adults"));
+                hotel.setchildren(rs.getInt("max_children"));
                 hotel.setImage(rs.getBytes("image")); // 👈 Set image blob data
 
                 return hotel;
