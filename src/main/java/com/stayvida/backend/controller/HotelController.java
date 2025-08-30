@@ -45,6 +45,7 @@ public class HotelController {
         map.put("max_children", hotel.getchildren());
         map.put("price", hotel.getPrice());
         map.put("availability", hotel.isAvailability());
+        map.put("rating", hotel.getRating());
 
         return map;
     }).collect(Collectors.toList());

@@ -33,7 +33,8 @@ public class HotelRepository {
                 hotel.setPrice(rs.getInt("price"));
                 hotel.setAdult(rs.getInt("max_adults"));
                 hotel.setchildren(rs.getInt("max_children"));
-                hotel.setImage(rs.getBytes("image")); // 👈 Set image blob data
+                hotel.setImage(rs.getBytes("image")); // 👈 Set image blob 
+                hotel.setRating(rs.getDouble("rating")); // Set rating
 
                 return hotel;
             }

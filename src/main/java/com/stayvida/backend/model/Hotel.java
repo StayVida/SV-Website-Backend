@@ -1,5 +1,7 @@
 package com.stayvida.backend.model;
 
+// import org.springframework.security.access.method.P;
+
 public class Hotel {
     private int id;
     private String hotel;
@@ -9,6 +11,7 @@ public class Hotel {
     private int children;
     private boolean availability; // <- add this
     private byte[] image; // 👈 Store raw image as byte array
+    private double rating; // New field for rating
 
     // Getters and Setters
     public int getId() { return id; }
@@ -35,4 +38,7 @@ public class Hotel {
 
     public byte[] getImage() { return image; }
     public void setImage(byte[] image) { this.image = image; }
+
+    public double getRating() {return rating;}
+    public void setRating(double rating) { this.rating = rating; }
 }
